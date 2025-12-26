@@ -82,11 +82,13 @@
   users.users.robin = {
     isNormalUser = true;
     description = "Robin Rheem";
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs.zsh.enable = true;
 
   nix = {
     package = pkgs.nix;
@@ -117,6 +119,10 @@
   # };
 
   # List services that you want to enable:
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
