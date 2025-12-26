@@ -7,6 +7,13 @@
     neovim
     code-cursor
     fzf
+    ripgrep
+    fd
+    bat
+    eza
+    starship
+    zoxide
+    tmux
   ];
   programs.home-manager.enable = true;
   programs.ssh = {
