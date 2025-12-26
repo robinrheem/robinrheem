@@ -20,14 +20,16 @@
       user = "git";
       identityFile = "~/.ssh/id_ed25519_github";
     };
+    matchBlocks."ts" = {
+      hostname = "song";
+      user = "deploy";
+    };
   };
   programs.git = {
     enable = true;
     settings.user = {
       name = "Robin Rheem";
       email = "robinrheem@gmail.com";
-    };
-    extraConfig = {
       core.editor = "nvim";
     };
   };
