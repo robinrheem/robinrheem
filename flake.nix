@@ -1,6 +1,14 @@
 {
   description = "NixOS + Home Manager Flake";
-
+  nixConfig = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    substitutors = [
+      "https://cache.nixos.org/"
+    ];
+  };
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
@@ -8,7 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
   outputs = { self, nixpkgs, home-manager, ... }:
   let 
     system = "x86_64-linux";
