@@ -41,16 +41,15 @@
   home.packages = with pkgs; [
     neovim
     appimage-run
-    fzf
     ripgrep
     fd
     bat
     eza
-    starship
-    zoxide
-    tmux
-    ghostty
     gh
+    rustup
+    gcc
+    pkg-config
+    openssl
   ];
   programs.home-manager.enable = true;
   programs.ghostty = {
