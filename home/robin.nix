@@ -28,6 +28,7 @@
       '';
       executable = true;
   };
+  xdg.enable = true;
   xdg.desktopEntries.cursor = {
     name = "Cursor";
     genericName = "Code Editor";
