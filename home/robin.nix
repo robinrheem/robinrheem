@@ -51,6 +51,7 @@
     gnumake
     pkg-config
     openssl
+    perf
   ];
   programs.home-manager.enable = true;
   programs.ghostty = {
