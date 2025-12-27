@@ -3,9 +3,43 @@
 {
   home.username = "robin";
   home.homeDirectory = "/home/robin";
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+  home.file.".local/opt/.keep".text = "";
+  home.file.".local/bin/cursor" = {
+    text = ''
+        #!${pkgs.bash}/bin/bash
+        set -euo pipefail
+  
+        APPIMAGE="$HOME/.local/opt/cursor.AppImage"
+  
+        if [ ! -x "$APPIMAGE" ]; then
+          echo "Cursor AppImage not found at $APPIMAGE"
+          echo "Download it from https://cursor.sh and save it there, then make it executable:"
+          echo "  mkdir -p \"$HOME/.local/opt\""
+          echo "  mv ~/Downloads/Cursor-*.AppImage \"$APPIMAGE\""
+          echo "  chmod +x \"$APPIMAGE\""
+	  echo "  appimage-run ./cursor.AppImage --appimage-extract # for icon"
+          exit 1
+        fi
+  
+        exec appimage-run "$APPIMAGE" "$@"
+      '';
+      executable = true;
+  };
+  xdg.desktopEntries.cursor = {
+    name = "Cursor";
+    genericName = "Code Editor";
+    comment = "AI-powered code editor";
+    exec = "cursor %F";
+    terminal = false;
+    categories = [ "Development" "IDE" ];
+    icon = "${config.home.homeDirectory}/.local/share/icons/cursor.png";
+  };
   home.packages = with pkgs; [
     neovim
-    code-cursor
+    appimage-run
     fzf
     ripgrep
     fd
@@ -14,6 +48,7 @@
     starship
     zoxide
     tmux
+    zoom-us
   ];
   programs.home-manager.enable = true;
   programs.ssh = {
