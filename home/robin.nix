@@ -49,6 +49,8 @@
     starship
     zoxide
     tmux
+    ghostty
+    gh
   ];
   programs.home-manager.enable = true;
   programs.ssh = {
@@ -95,6 +97,8 @@
     };
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#carnage";
+      ls = "eza";
+      cat = "bat";
     };
   };
   home.stateVersion = "25.11";
