@@ -123,6 +123,7 @@
     enable = true;
     useRoutingFeatures = "client";
   };
+  services.flatpak.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
