@@ -53,6 +53,7 @@
     gh
   ];
   programs.home-manager.enable = true;
+  programs.ghostty.enable = true;
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
