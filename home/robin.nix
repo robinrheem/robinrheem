@@ -53,7 +53,14 @@
     gh
   ];
   programs.home-manager.enable = true;
-  programs.ghostty.enable = true;
+  programs.ghostty = {
+    enable = true;
+    settings = {
+      cursor-style = "block";
+      cursor-style-blink = false;
+      shell-integration-features = "no-cursor";
+    };
+  };
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
