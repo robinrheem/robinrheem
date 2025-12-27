@@ -48,7 +48,6 @@
     starship
     zoxide
     tmux
-    zoom-us
   ];
   programs.home-manager.enable = true;
   programs.ssh = {
