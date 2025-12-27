@@ -48,6 +48,7 @@
     gh
     rustup
     gcc
+    gnumake
     pkg-config
     openssl
   ];
@@ -57,6 +58,7 @@
     settings = {
       cursor-style = "block";
       cursor-style-blink = false;
+      term = "xterm-256color";
       shell-integration-features = "no-cursor";
     };
   };
@@ -65,6 +67,16 @@
     enableDefaultConfig = false;
     matchBlocks."*" = {
       addKeysToAgent = "yes";
+    };
+    matchBlocks."pondy" = {
+      hostname = "ponderosa.biol.berkeley.edu";
+      user = "roundRobin";
+      identityFile = "~/.ssh/id_ed25519_berkeley";
+    };
+    matchBlocks."cb" = {
+      hostname = "34.11.163.223";
+      user = "roundrobin";
+      identityFile = "~/.ssh/id_ed25519_berkeley";
     };
     matchBlocks."github.com" = {
       hostname = "github.com";
