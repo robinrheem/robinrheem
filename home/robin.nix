@@ -52,6 +52,7 @@
     pkg-config
     openssl
     perf
+    uv
   ];
   programs.home-manager.enable = true;
   programs.ghostty = {
