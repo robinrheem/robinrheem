@@ -6,6 +6,10 @@
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
   home.file.".local/opt/.keep".text = "";
   home.file.".local/bin/cursor" = {
     text = ''
@@ -92,9 +96,11 @@
   };
   programs.git = {
     enable = true;
-    settings.user = {
-      name = "Robin Rheem";
-      email = "robinrheem@gmail.com";
+    settings = {
+      user = {
+        name = "Robin Rheem";
+        email = "robinrheem@gmail.com";
+      };
       core.editor = "nvim";
     };
   };
