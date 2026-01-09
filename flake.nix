@@ -18,19 +18,32 @@
   };
   outputs = { self, nixpkgs, home-manager, ... }:
   let 
+    lib = nixpkgs.lib;
     system = "x86_64-linux";
-  in {
-    nixosConfigurations.carnage = nixpkgs.lib.nixosSystem {
+    pkgs = import nixpkgs {
       inherit system;
-      modules = [
-        ./hosts/carnage/configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages= true;
-          home-manager.users.robin = import ./home/robin.nix;
-        }
-      ];
+      config.allowUnfree = true;
+    };
+  in {
+    nixosConfigurations = {
+      carnage = lib.nixosSystem {
+        inherit system;
+	modules = [
+	  ./hosts/carnage/default.nix
+	  # home-manager integrated into NixOS
+	  home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages= true;
+            home-manager.users.robin = import ./users/robin/home.nix;
+	  }
+        ];
+      };
+    };
+    homeConfigurations = {
+      "robin@carnage" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+	modules = [ ./users/robin/home.nix ];
+      };
     };
   };
 }

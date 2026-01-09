@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ../../homemodules/common.nix
+  ];
+
   home.username = "robin";
   home.homeDirectory = "/home/robin";
   home.sessionPath = [
