@@ -10,6 +10,18 @@
       ./hardware.nix
     ];
 
+  nixpkgs.config.allowUnfree = true;
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  hardware.nvidia = {
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -44,6 +56,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
@@ -98,6 +111,8 @@
   programs.firefox.enable = true;
   programs.zsh.enable = true;
   programs.nix-ld.enable = true;
+  programs.steam.enable = true; 
+  programs.gamemode.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
