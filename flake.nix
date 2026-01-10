@@ -41,7 +41,7 @@
       morales = lib.nixosSystem {
         inherit system;
 	modules = [
-	  ./hosts/carnage/default.nix
+	  ./hosts/morales/default.nix
 	  # home-manager integrated into NixOS
 	  home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
@@ -53,6 +53,10 @@
     };
     homeConfigurations = {
       "robin@carnage" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+	modules = [ ./users/robin/home.nix ];
+      };
+      "robin@morales" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 	modules = [ ./users/robin/home.nix ];
       };
