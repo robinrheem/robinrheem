@@ -12,6 +12,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  hardware.xpadneo.enable = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -20,6 +21,18 @@
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Privacy = "device";
+	JustWorksRepairing = "always";
+	Class = "0x000100";
+	FastConnectable = "true";
+      };
+    };
   };
 
   # Bootloader.
