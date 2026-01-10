@@ -38,6 +38,18 @@
 	  }
         ];
       };
+      morales = lib.nixosSystem {
+        inherit system;
+	modules = [
+	  ./hosts/carnage/default.nix
+	  # home-manager integrated into NixOS
+	  home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages= true;
+            home-manager.users.robin = import ./users/robin/home.nix;
+	  }
+        ];
+      };
     };
     homeConfigurations = {
       "robin@carnage" = home-manager.lib.homeManagerConfiguration {
