@@ -78,14 +78,17 @@
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.displayManager.gdm.wayland = false;
-  services.displayManager.autologin.enable = true;
-  services.displayManager.autologin.user = "gamer";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "gamer";
   services.desktopManager.gnome.enable = true;
-  services.logind.extraConfig = ''
-    IdleAction=ignore
-    HandleSuspendKey=ignore
-    HandleHibernateKey=ignore
-  '';
+  services.logind.settings.Login = {
+    IdleAction = "ignore";
+    HandleSuspendKey = "ignore";
+    HandleHibernateKey = "ignore";
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -127,7 +130,6 @@
     isNormalUser = true;
     description = "Steam console user";
     shell = pkgs.zsh;
-    home = "home/gamer";
     createHome = true;
     extraGroups = [ 
       "video" "audio" "input" "networkmanager" "render" 
@@ -176,7 +178,14 @@
   services.flatpak.enable = true;
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
