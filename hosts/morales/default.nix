@@ -13,6 +13,7 @@
   nixpkgs.config.allowUnfree = true;
 
   hardware.xpadneo.enable = true;
+  hardware.steam-hardware.enable = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -76,7 +77,15 @@
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.wayland = false;
+  services.displayManager.autologin.enable = true;
+  services.displayManager.autologin.user = "gamer";
   services.desktopManager.gnome.enable = true;
+  services.logind.extraConfig = ''
+    IdleAction=ignore
+    HandleSuspendKey=ignore
+    HandleHibernateKey=ignore
+  '';
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -114,6 +123,16 @@
     shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];
   };
+  users.users.gamer = {
+    isNormalUser = true;
+    description = "Steam console user";
+    shell = pkgs.zsh;
+    home = "home/gamer";
+    createHome = true;
+    extraGroups = [ 
+      "video" "audio" "input" "networkmanager" "render" 
+    ];
+  };
 
   nix = {
     package = pkgs.nix;
@@ -127,7 +146,10 @@
   programs.firefox.enable = true;
   programs.zsh.enable = true;
   programs.nix-ld.enable = true;
-  programs.steam.enable = true; 
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
   programs.gamemode.enable = true;
 
   # List packages installed in system profile. To search, run:
