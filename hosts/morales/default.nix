@@ -13,6 +13,7 @@
   nixpkgs.config.allowUnfree = true;
 
   hardware.xpadneo.enable = true;
+  hardware.nvidia.modesetting.enable = true;
   hardware.steam-hardware.enable = true;
   hardware.graphics = {
     enable = true;
@@ -74,17 +75,11 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-  services.xserver.displayManager.sessionCommands = ''
-    if [ "$USER" = "gamer" ]; then
-      chvt 2
-    fi
-  '';
-
-  # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "gamer";
   services.desktopManager.gnome.enable = true;
+
   services.logind.settings.Login = {
     IdleAction = "ignore";
     HandleSuspendKey = "ignore";
@@ -93,6 +88,12 @@
     HandleLidSwitchExternalPower = "ignore";
     HandleLidSwitchDocked = "ignore";
   };
+  systemd.sleep.extraConfig = ''
+    AllowSuspend=no
+    AllowHibernation=no
+    AllowHybridSleep=no
+    AllowSuspendThenHibernate=no
+  '';
 
   # Configure keymap in X11
   services.xserver.xkb = {
