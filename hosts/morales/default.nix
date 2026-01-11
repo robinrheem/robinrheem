@@ -74,10 +74,14 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.displayManager.sessionCommands = ''
+    if [ "$USER" = "gamer" ]; then
+      chvt 2
+    fi
+  '';
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
-  services.displayManager.gdm.wayland = false;
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "gamer";
   services.desktopManager.gnome.enable = true;
