@@ -48,7 +48,6 @@
   };
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    neovim
     appimage-run
     ripgrep
     fd
@@ -65,6 +64,10 @@
     nerd-fonts.jetbrains-mono
   ];
   programs.home-manager.enable = true;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
   programs.ghostty = {
     enable = true;
     settings = {
