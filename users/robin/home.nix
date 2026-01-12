@@ -46,6 +46,7 @@
     categories = [ "Development" "IDE" ];
     icon = "${config.home.homeDirectory}/.local/share/icons/cursor.png";
   };
+  fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     neovim
     appimage-run
@@ -61,6 +62,7 @@
     openssl
     perf
     uv
+    nerd-fonts.jetbrains-mono
   ];
   programs.home-manager.enable = true;
   programs.ghostty = {
@@ -70,6 +72,8 @@
       cursor-style-blink = false;
       term = "xterm-256color";
       shell-integration-features = "no-cursor";
+      font-family = "JetBrainsMono Nerd Font";
+      font-size = 13;
     };
   };
   programs.ssh = {
