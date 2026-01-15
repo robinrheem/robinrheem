@@ -62,6 +62,7 @@
     perf
     uv
     nerd-fonts.jetbrains-mono
+    llm
   ];
   programs.home-manager.enable = true;
   programs.neovim = {
