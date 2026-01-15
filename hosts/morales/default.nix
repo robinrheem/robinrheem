@@ -24,6 +24,7 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+  hardware.nvidia-container-toolkit.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
