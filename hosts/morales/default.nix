@@ -41,6 +41,34 @@
     enable = true;
     enableOnBoot = true;
   };
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers = {
+      vllm = {
+        image = "vllm/vllm-openai:latest";
+        extraOptions = [
+          "--device=nvidia.com/gpu=all"
+          "--ipc=host"
+          "--ulimit=memlock=-1"
+          "--ulimit=stack=67108864"
+          "--shm-size=16g"
+        ];
+        ports = [ "8000:8000" ];
+        volumes = [
+          "/home/robin/models:/models"
+          "/home/robin/hf-cache:/root/.cache/huggingface"
+        ];
+        cmd = [
+          "--model" "Qwen/Qwen2.5-32B-Instruct-AWQ"
+          "--host" "0.0.0.0"
+          "--port" "8000"
+          "--dtype" "half"
+          "--gpu-memory-utilization" "0.80"
+          "--max-model-len" "8192"
+        ];
+      };
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -198,7 +226,8 @@
   };
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedTCPPorts = [];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 8000 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
