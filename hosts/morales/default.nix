@@ -13,13 +13,13 @@
   nixpkgs.config.allowUnfree = true;
 
   hardware.xpadneo.enable = true;
-  hardware.nvidia.modesetting.enable = true;
   hardware.steam-hardware.enable = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
   hardware.nvidia = {
+    modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -35,6 +35,10 @@
 	FastConnectable = "true";
       };
     };
+  };
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
   };
 
   # Bootloader.
@@ -129,7 +133,7 @@
     isNormalUser = true;
     description = "Robin Rheem";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
   users.users.gamer = {
     isNormalUser = true;
@@ -162,6 +166,8 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     btop
+    nvidia-container-toolkit
+    pciutils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
