@@ -116,6 +116,9 @@
       set -g status-interval 5
       # True color
       set -as terminal-overrides ",*:Tc"
+      bind -T copy-mode-vi v send -X begin-selection
+      bind -T copy-mode-vi V send -X select-line
+      bind -T copy-mode-vi C-v send -X rectangle-toggle
     '';
   };
   programs.ghostty = {
