@@ -119,6 +119,11 @@
       bind -T copy-mode-vi v send -X begin-selection
       bind -T copy-mode-vi V send -X select-line
       bind -T copy-mode-vi C-v send -X rectangle-toggle
+      # Notifications
+      set -g monitor-activity on
+      set -g visual-activity on
+      set -g bell-action any
+      set -g visual-bell on
     '';
   };
   programs.ghostty = {
