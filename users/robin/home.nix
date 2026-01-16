@@ -69,6 +69,54 @@
     enable = true;
     defaultEditor = true;
   };
+  programs.tmux = {
+    enable = true;
+    terminal = "xterm-256color";
+    keyMode = "vi";
+    mouse = true;
+    prefix = "C-a";
+    baseIndex = 1;
+    clock24 = true;
+    escapeTime = 0;
+    plugins = with pkgs.tmuxPlugins; [
+      sensible
+      yank
+      resurrect
+      continuum
+      {
+        plugin = catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavour "mocha"
+        '';
+      }
+    ];
+    extraConfig = ''
+      # Reload config
+      bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
+      # Split panes
+      bind | split-window -h
+      bind - split-window -v
+      # Vim-style pane navigation
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
+      # Resize panes
+      bind -r H resize-pane -L 5
+      bind -r J resize-pane -D 5
+      bind -r K resize-pane -U 5
+      bind -r L resize-pane -R 5
+      # Better copy mode
+      set -g mode-keys vi
+      # Fast switching
+      bind Tab last-window
+      # Status bar
+      set -g status-position bottom
+      set -g status-interval 5
+      # True color
+      set -as terminal-overrides ",*:Tc"
+    '';
+  };
   programs.ghostty = {
     enable = true;
     settings = {
