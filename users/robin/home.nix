@@ -63,6 +63,7 @@
     uv
     nerd-fonts.jetbrains-mono
     llm
+    claude-code
   ];
   programs.home-manager.enable = true;
   programs.neovim = {
