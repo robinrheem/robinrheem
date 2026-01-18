@@ -64,6 +64,10 @@
     nerd-fonts.jetbrains-mono
     llm
     claude-code
+    libffi
+    zlib
+    sqlite
+    libxml2
   ];
   programs.home-manager.enable = true;
   programs.neovim = {

@@ -25,6 +25,11 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+  };
+
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
@@ -84,7 +89,7 @@
     isNormalUser = true;
     description = "Robin Rheem";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
   # Install firefox.
