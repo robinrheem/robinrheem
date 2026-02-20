@@ -68,6 +68,10 @@
     zlib
     sqlite
     libxml2
+    zathura
+    jetbrains.idea
+    R
+    signal-desktop
   ];
   programs.home-manager.enable = true;
   programs.neovim = {
@@ -149,6 +153,11 @@
     };
     matchBlocks."pondy" = {
       hostname = "ponderosa.biol.berkeley.edu";
+      user = "roundRobin";
+      identityFile = "~/.ssh/id_ed25519_berkeley";
+    };
+    matchBlocks."tildy" = {
+      hostname = "tilden.biol.berkeley.edu";
       user = "roundRobin";
       identityFile = "~/.ssh/id_ed25519_berkeley";
     };
