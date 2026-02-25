@@ -71,7 +71,7 @@
     zathura
     jetbrains.idea
     R
-    signal-desktop
+    newsboat
   ];
   programs.home-manager.enable = true;
   programs.neovim = {
